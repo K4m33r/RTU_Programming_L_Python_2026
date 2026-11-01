@@ -1,3 +1,4 @@
+
 """
 Task 4 – Text-based Arithmetic Analyzer
 ---------------------------------------
@@ -20,12 +21,11 @@ Helper functions:
 - analyze_text(text)     -> dict   : combines the helpers (see below)
 
 analyze_text() returns a dict with exactly these keys:
-    "characters" : int   (from count_characters)
-    "words"      : int   (from count_words)
-    "numbers"    : list  (from extract_numbers)
-    "sum"        : int   (sum of the numbers, 0 if there are none)
-    "average"    : float (average of the numbers, 0.0 if there are none,
-                          NOT rounded)
+    "characters" : int
+    "words"      : int
+    "numbers"    : list
+    "sum"        : int
+    "average"    : float
 
 In the main block: read a line of text, call analyze_text(), and print a
 summary. Round the average to 2 decimals when printing.
@@ -57,30 +57,63 @@ Examples (these are also used to check your work):
 
 def count_characters(text: str) -> int:
     """Count characters that are not whitespace."""
-    # TODO: implement
-    raise NotImplementedError("count_characters() is not implemented yet")
+    sayac = 0
+
+    for harf in text:
+        if not harf.isspace():
+            sayac += 1
+
+    return sayac
 
 
 def count_words(text: str) -> int:
     """Count number of whitespace-separated words."""
-    # TODO: implement
-    raise NotImplementedError("count_words() is not implemented yet")
+    return len(text.split())
 
 
 def extract_numbers(text: str) -> list[int]:
     """Return a list of the integers found in text, in order."""
-    # TODO: implement
-    raise NotImplementedError("extract_numbers() is not implemented yet")
+    sayilar = []
+
+    for kelime in text.split():
+        temiz_kelime = kelime.rstrip(".,!?;:")
+
+        if temiz_kelime.isdigit():
+            sayilar.append(int(temiz_kelime))
+        elif temiz_kelime.startswith("-") and temiz_kelime[1:].isdigit():
+            sayilar.append(int(temiz_kelime))
+
+    return sayilar
 
 
 def analyze_text(text: str) -> dict:
     """Return a dict with characters, words, numbers, sum and average."""
-    # TODO: call the helper functions and compute sum and average
-    raise NotImplementedError("analyze_text() is not implemented yet")
+    karakter = count_characters(text)
+    kelime = count_words(text)
+    sayilar = extract_numbers(text)
+
+    toplam = sum(sayilar)
+
+    if len(sayilar) > 0:
+        ortalama = toplam / len(sayilar)
+    else:
+        ortalama = 0.0
+
+    return {
+        "characters": karakter,
+        "words": kelime,
+        "numbers": sayilar,
+        "sum": toplam,
+        "average": ortalama
+    }
 
 
 if __name__ == "__main__":
-    # Keep all input() calls inside this block, otherwise the autograder
-    # cannot import your file.
-    # TODO: read input, call analyze_text(), and print results
-    pass
+    metin = input("Enter text: ")
+    sonuc = analyze_text(metin)
+
+    print(f"Characters (no spaces): {sonuc['characters']}")
+    print(f"Words: {sonuc['words']}")
+    print(f"Numbers: {sonuc['numbers']}")
+    print(f"Sum: {sonuc['sum']}")
+    print(f"Average: {sonuc['average']:.2f}")

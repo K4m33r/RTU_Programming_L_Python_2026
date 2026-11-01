@@ -1,3 +1,4 @@
+
 """
 Task 3 – Function with Combined Logic
 -------------------------------------
@@ -32,12 +33,17 @@ Examples (these are also used to check your work):
 
 def analyze_sentence(text: str) -> tuple[int, int, bool]:
     """Return (length, word count, contains 'python') for the given text."""
-    # TODO: implement function logic
-    raise NotImplementedError("analyze_sentence() is not implemented yet")
+    karakter = len(text)
+    kelime = len(text.split())
+    python_var = "python" in text.lower()
+
+    return karakter, kelime, python_var
 
 
 if __name__ == "__main__":
-    # Keep all input() calls inside this block, otherwise the autograder
-    # cannot import your file.
-    # TODO: read sentence from input, call function, and print results
-    pass
+    cumle = input("Enter a sentence: ")
+    karakter, kelime, python_var = analyze_sentence(cumle)
+
+    print(f"Characters: {karakter}")
+    print(f"Words: {kelime}")
+    print(f"Contains 'Python': {python_var}")
