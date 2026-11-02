@@ -53,35 +53,53 @@ Examples (these are also used to check your work):
 
 def average(values: list[float]) -> float:
     """Return the average of values, or 0.0 for an empty list."""
-    # TODO: implement
-    raise NotImplementedError("average() is not implemented yet")
+    if len(values) == 0:
+        return 0.0
+
+    return sum(values) / len(values)
 
 
 def largest_city(populations: dict[str, int]) -> tuple[str, int]:
     """Return (city, population) for the city with the largest population."""
-    # TODO: implement
-    raise NotImplementedError("largest_city() is not implemented yet")
+    if not populations:
+        return ("", 0)
+
+    return max(populations.items(), key=lambda sehir: sehir[1])
 
 
 def smallest_city(populations: dict[str, int]) -> tuple[str, int]:
     """Return (city, population) for the city with the smallest population."""
-    # TODO: implement
-    raise NotImplementedError("smallest_city() is not implemented yet")
+    if not populations:
+        return ("", 0)
+
+    return min(populations.items(), key=lambda sehir: sehir[1])
 
 
 def total_population(populations: dict[str, int]) -> int:
     """Return the sum of all populations."""
-    # TODO: implement
-    raise NotImplementedError("total_population() is not implemented yet")
+    return sum(populations.values())
 
 
 if __name__ == "__main__":
     # Keep all input() and print() calls inside this block, otherwise the
     # autograder cannot import your file.
 
-    # TODO: Create your own datasets - up to you to fill in the data
-    temperatures = []
-    city_population = {}
+    temperatures = [2.0, 3.0, 5.0, 4.0, 1.0, 0.0, 6.0]
 
-    # TODO: call the functions above and print the results
-    pass
+    city_population = {
+        "Riga": 605000,
+        "Daugavpils": 78000,
+        "Liepaja": 67000,
+        "Jelgava": 55000,
+        "Valmiera": 23000,
+    }
+
+    ortalama = average(temperatures)
+    buyuk_sehir = largest_city(city_population)
+    kucuk_sehir = smallest_city(city_population)
+    toplam = total_population(city_population)
+
+    print(f"Average temperature: {ortalama:.1f}")
+    print(f"Largest city: {buyuk_sehir[0]} - {buyuk_sehir[1]}")
+    print(f"Smallest city: {kucuk_sehir[0]} - {kucuk_sehir[1]}")
+    print(f"Total population: {toplam}")
